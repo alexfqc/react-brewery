@@ -1,0 +1,16 @@
+.app {
+  background-color: #1f0c01;
+  color: #fff;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.app__container {
+  float: left;
+  height: 100%;
+  margin-left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+  width: 1024px;
+}

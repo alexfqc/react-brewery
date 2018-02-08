@@ -10,6 +10,6 @@ describe('App component', () => {
 
   it('Should Contain the component ContainerList', () => {
     const app = mount(<App />);
-    expect(app.find(ContainerList).length).toBe(1);
+    expect(app.find(ContainerList)).toBeDefined();
   });
 });
