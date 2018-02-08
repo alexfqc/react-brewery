@@ -1,4 +1,4 @@
-export default [
+export const containersMock = [
   {
     id: 0,
     name: 'Pilsner',
@@ -42,3 +42,21 @@ export default [
     temp: 8,
   },
 ];
+
+const getRandomArbitrary = (min, max) => Math.floor((Math.random() * (max - min)) + min);
+
+export const simulateServerDataChange = (containers) => {
+  const id = getRandomArbitrary(0, 5);
+  const container = containers.find(c => c.id === id);
+  const temp = getRandomArbitrary(container.minTemp, container.maxTemp + 2);
+  const updatedContainer = {
+    ...container,
+    temp,
+  };
+
+  return [
+    ...containers.slice(0, id),
+    updatedContainer,
+    ...containers.slice(id + 1),
+  ];
+};
