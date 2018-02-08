@@ -21,18 +21,34 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
     "pre-commit": "^1.2.2",
-    "react-scripts": "1.1.0"
+    "react-scripts": "1.1.0",
+    "sinon": "^4.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "test:ci": "CI=true react-scripts test --env=jsdom",
+    "test:ci": "CI=true react-scripts test --env=jsdom -- --coverage",
     "lint": "eslint --ext .jsx,.js src/",
     "eject": "react-scripts eject"
   },
   "pre-commit": [
     "lint",
     "test:ci"
-  ]
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/components/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/path/to/dir/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
 }

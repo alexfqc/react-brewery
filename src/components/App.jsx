@@ -1,9 +1,7 @@
 import React from 'react';
 import ContainerList from './container/list/ContainerList';
-import containersMock from '../mock/containersMock';
+import { containersMock, simulateServerDataChange } from '../mock/containersMock';
 import './App.css';
-
-const getRandomArbitrary = (min, max) => Math.floor((Math.random() * (max - min)) + min);
 
 class App extends React.Component {
   constructor() {
@@ -17,7 +15,7 @@ class App extends React.Component {
   componentWillMount() {
     this.setState({ containers: containersMock });
 
-    const intervalId = setInterval(() => this.simulateServerDataChange(), 2000);
+    const intervalId = setInterval(() => this.loadData(), 2000);
 
     this.setState({ intervalId });
   }
@@ -26,21 +24,10 @@ class App extends React.Component {
     clearInterval(this.state.intervalId);
   }
 
-  simulateServerDataChange() {
+  loadData() {
     const { containers } = this.state;
-    const id = getRandomArbitrary(0, 5);
-    const container = containers.find(c => c.id === id);
-    const temp = getRandomArbitrary(container.minTemp, container.maxTemp + 2);
-    const updatedContainer = {
-      ...container,
-      temp,
-    };
+    const updatedContainerList = simulateServerDataChange(containers);
 
-    const updatedContainerList = [
-      ...containers.slice(0, id),
-      updatedContainer,
-      ...containers.slice(id + 1),
-    ];
     this.setState({ containers: updatedContainerList });
   }
 
