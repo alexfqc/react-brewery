@@ -1,0 +1,41 @@
+.item {
+  border: solid;
+  border-radius: 10px;
+  box-sizing: border-box;
+  float: left;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.item__name {
+  background: rgba(255,255,255,.5);
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  float: left;
+  height: 25px;
+  line-height: 1.5;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.item__average {
+  float: left;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 1.4em;
+}
+
+.item__temp {
+  box-sizing: border-box;
+  float: left;
+  font-size: 1.7em;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
