@@ -1,59 +1,60 @@
 import React from 'react';
 import ContainerList from './container/list/ContainerList';
+import containersMock from '../mock/containersMock';
 import './App.css';
 
-const containers = [
-  {
-    id: 0,
-    name: 'Pilsner',
-    minTemp: 4,
-    maxTemp: 6,
-    temp: 5,
-  },
-  {
-    id: 1,
-    name: 'IPA',
-    minTemp: 5,
-    maxTemp: 6,
-    temp: 7,
-  },
-  {
-    id: 2,
-    name: 'Lager',
-    minTemp: 4,
-    maxTemp: 7,
-    temp: 4,
-  },
-  {
-    id: 3,
-    name: 'Stout',
-    minTemp: 6,
-    maxTemp: 8,
-    temp: 7,
-  },
-  {
-    id: 4,
-    name: 'Wheat beer',
-    minTemp: 3,
-    maxTemp: 5,
-    temp: 5,
-  },
-  {
-    id: 5,
-    name: 'Pale Ale',
-    minTemp: 4,
-    maxTemp: 6,
-    temp: 8,
-  },
-];
+const getRandomArbitrary = (min, max) => Math.floor((Math.random() * (max - min)) + min);
 
-const App = () => (
-  <div className="app">
-    <div className="app__container">
-      <h2>BREVERY ONLINE</h2>
-      <ContainerList containers={containers} />
-    </div>
-  </div>
-);
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      containers: [],
+      intervalId: 0,
+    };
+  }
+
+  componentWillMount() {
+    this.setState({ containers: containersMock });
+
+    const intervalId = setInterval(() => this.simulateServerDataChange(), 2000);
+
+    this.setState({ intervalId });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
+  }
+
+  simulateServerDataChange() {
+    const { containers } = this.state;
+    const id = getRandomArbitrary(0, 5);
+    const container = containers.find(c => c.id === id);
+    const temp = getRandomArbitrary(container.minTemp, container.maxTemp + 2);
+    const updatedContainer = {
+      ...container,
+      temp,
+    };
+
+    const updatedContainerList = [
+      ...containers.slice(0, id),
+      updatedContainer,
+      ...containers.slice(id + 1),
+    ];
+    this.setState({ containers: updatedContainerList });
+  }
+
+  render() {
+    const { containers } = this.state;
+    return (
+      <div className="app">
+        <div className="app__container">
+          <h2>BREVERY ONLINE</h2>
+          <ContainerList containers={containers} />
+        </div>
+      </div>
+    );
+  }
+}
 
 export default App;
