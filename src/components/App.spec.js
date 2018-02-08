@@ -1,15 +1,21 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import App from './App';
 import ContainerList from './container/list/ContainerList';
+import ContainerItem from './container/list/item/ContainerItem';
 
 describe('App component', () => {
   it('renders without crashing', () => {
-    shallow(<App />);
+    expect(mount(<App />)).toBeDefined();
   });
 
   it('Should Contain the component ContainerList', () => {
     const app = mount(<App />);
     expect(app.find(ContainerList)).toBeDefined();
+  });
+
+  it('Should Contain 6 containers', () => {
+    const app = mount(<App />);
+    expect(app.find(ContainerItem).length).toBe(6);
   });
 });
