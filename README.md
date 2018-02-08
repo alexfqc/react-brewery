@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/alexfqc/react-brewery/tree/master.svg?style=svg)](https://circleci.com/gh/alexfqc/react-brewery/tree/master)
+
 # react-brewery
 This project simulates a system that controls the temperature of beers inside containers
 
